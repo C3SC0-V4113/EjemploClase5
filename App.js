@@ -16,13 +16,13 @@ import DatePicker from 'react-native-date-picker';
 
 export default function App() {
   const [nombre, guardarInputTexto] = useState('');
-  const [date, setDate] = useState(new Date());
+
   const [open, setOpen] = useState(false);
-  /*const [apellido, guardarInputTexto] = useState('');
-  const [correo, guardarInputTexto] = useState('');
-  const [usuario, guardarInputTexto] = useState('');
-  const [fecha, guardarInputTexto] = useState('');
-  const [contra, guardarInputTexto] = useState('');*/
+  const [apellido, guardarInputApellido] = useState('');
+  const [correo, guardarInputMail] = useState('');
+  const [usuario, guardarInputUser] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [contra, guardarInputPass] = useState('');
   const [lista, guardarlista] = useState([]);
 
   useEffect(() => {
@@ -31,8 +31,8 @@ export default function App() {
 
   const guardarDato = async () => {
     try {
-      const nombrealumno = {nombre};
-      nombrealumno.id = shortid.generate();
+      const nombrealumno = "Nombre: "+{nombre}+" Apellido: "+{apellido}+" Correo: "+{correo}+" Usuario: "+{usuario}+" Fecha de Nacimiento: "+{date};
+      nombrealumno.id = shortid.generate()+100;
 
       const listanombres = [...lista, nombrealumno];
       guardarlista(listanombres);
@@ -68,34 +68,34 @@ export default function App() {
     <>
       <View style={styles.contenedor}>
         <TextInput
-        placeholderTextColor="black"
+          placeholderTextColor="black"
           placeholder="Escribe tu Nombre"
           style={styles.input}
           onChangeText={texto => guardarInputTexto(texto)}
         />
 
         <TextInput
-        placeholderTextColor="black"
+          placeholderTextColor="black"
           placeholder="Escribe tu Apellido"
           style={styles.input}
-          onChangeText={texto => guardarInputTexto(texto)}
+          onChangeText={texto => guardarInputApellido(texto)}
         />
 
         <TextInput
-        placeholderTextColor="black"
+          placeholderTextColor="black"
           placeholder="Escribe tu Correo"
           keyboardType="email-address"
           style={styles.input}
-          onChangeText={texto => guardarInputTexto(texto)}
+          onChangeText={texto => guardarInputMail(texto)}
         />
 
         <TextInput
-        placeholderTextColor="black"
+          placeholderTextColor="black"
           placeholder="Escribe tu Usuario"
           style={styles.input}
-          onChangeText={texto => guardarInputTexto(texto)}
+          onChangeText={texto => guardarInputUser(texto)}
         />
-        <Button title="Open" onPress={() => setOpen(true)} />
+        <Button title="Escriba su Fecha de Nacimiento" onPress={() => setOpen(true)} />
         <DatePicker
           modal
           open={open}
@@ -110,12 +110,12 @@ export default function App() {
         />
 
         <TextInput
-        placeholderTextColor="black"
+          placeholderTextColor="black"
           placeholder="Escribe tu contraseña"
           autoCompleteType="password"
           secureTextEntry={true}
           style={styles.input}
-          onChangeText={texto => guardarInputTexto(texto)}
+          onChangeText={texto => guardarInputPass(texto)}
         />
 
         <Button title="Guardar" color="#333" onPress={() => guardarDato()} />
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: 3,
-    color: "black",
+    color: 'black',
     borderColor: '#666',
     borderBottomWidth: 1,
     width: 300,
